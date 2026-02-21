@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useAppContext } from '../context/AppContext';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 interface Product {
     id: string;
@@ -22,10 +22,12 @@ export const Category: React.FC = () => {
 
     const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
     const [products, setProducts] = useState<Product[]>([]);
+    const [categories, setCategories] = useState<any[]>([]);
+
 
     // Filter states
-    const [minPrice, setMinPrice] = useState(20);
-    const [maxPrice, setMaxPrice] = useState(350);
+    const [minPrice, setMinPrice] = useState(0);
+    const [maxPrice, setMaxPrice] = useState(500);
     const [inStockOnly, setInStockOnly] = useState(false);
     const [compatibleOnly, setCompatibleOnly] = useState(!!vehicle?.make);
     const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
@@ -37,64 +39,139 @@ export const Category: React.FC = () => {
         );
     };
 
-    const fetchProducts = () => {
-        setLoading(true);
-        const params = new URLSearchParams();
+    // Derived states
+    const availableBrands = useMemo(() => {
+        const brands = new Map<string, number>();
+        products.forEach(p => {
+            if (p.brand) {
+                brands.set(p.brand, (brands.get(p.brand) || 0) + 1);
+            }
+        });
+        return Array.from(brands.entries()).map(([name, count]) => ({ name, count }));
+    }, [products]);
 
-        if (categoryParam !== 'all-categories') {
-            params.append('category', categoryParam);
-        }
-        if (selectedBrands.length > 0) {
-            params.append('brands', selectedBrands.join(','));
-        }
-        if (minPrice) params.append('min_price', minPrice.toString());
-        if (maxPrice) params.append('max_price', maxPrice.toString());
+    useEffect(() => {
+        let isActive = true;
 
-        // Add vehicle params if 'compatibleOnly' is true and a vehicle is selected in context
-        if (compatibleOnly && vehicle?.make) {
-            params.append('make', vehicle.make);
-            if (vehicle.model) params.append('model', vehicle.model);
-            if (vehicle.year) params.append('year', vehicle.year);
-        }
+        const timeoutId = setTimeout(() => {
+            setLoading(true);
+            const params = new URLSearchParams();
 
-        fetch(`/api/products?${params.toString()}`)
+            if (categoryParam !== 'all-categories') {
+                params.append('category', categoryParam);
+            }
+            if (selectedBrands.length > 0) {
+                params.append('brands', selectedBrands.join(','));
+            }
+            params.append('min_price', minPrice.toString());
+            params.append('max_price', maxPrice.toString());
+
+            if (inStockOnly) {
+                params.append('in_stock', 'true');
+            }
+
+            // Add vehicle params if 'compatibleOnly' is true and a vehicle is selected in context
+            if (compatibleOnly && vehicle?.make) {
+                params.append('make', vehicle.make);
+                params.append('model', vehicle.model);
+                params.append('year', vehicle.year.toString());
+            }
+
+            fetch(`/api/products?${params.toString()}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (!isActive) return;
+                    if (data.status === 'success') {
+                        setProducts(data.data || []);
+                    }
+                })
+                .catch(err => {
+                    if (!isActive) return;
+                    console.error("Error fetching products:", err);
+                    setProducts([]);
+                })
+                .finally(() => {
+                    if (isActive) {
+                        setLoading(false);
+                    }
+                });
+        }, 400); // 400ms debounce
+
+        return () => {
+            isActive = false;
+            clearTimeout(timeoutId);
+        };
+    }, [categoryParam, selectedBrands, minPrice, maxPrice, compatibleOnly, inStockOnly, vehicle]);
+
+    useEffect(() => {
+        fetch('/api/categories')
             .then(res => res.json())
             .then(data => {
                 if (data.status === 'success') {
-                    setProducts(data.data);
+                    setCategories(data.data || []);
                 }
             })
-            .catch(err => console.error("Error fetching products:", err))
-            .finally(() => setLoading(false));
-    };
-
-    useEffect(() => {
-        fetchProducts();
-    }, [categoryParam, selectedBrands, minPrice, maxPrice, compatibleOnly, vehicle]);
+            .catch(err => console.error("Error fetching categories:", err));
+    }, []);
 
     const toggleMobileFilters = () => setIsMobileFiltersOpen(!isMobileFiltersOpen);
+
+    const getSubcategories = (parentId: string | null) => categories.filter(c => c.parent_id === parentId);
+
+    const renderCategoryTree = (parentId: string | null = null, level: number = 0) => {
+        const subs = getSubcategories(parentId);
+        if (subs.length === 0) return null;
+
+        return (
+            <div className={`space - y - 1 ${level > 0 ? 'ml-4 mt-1 border-l border-slate-100 pl-3' : ''} `}>
+                {subs.map(cat => {
+                    const isSelected = categoryParam === cat.id;
+                    return (
+                        <div key={cat.id}>
+                            <Link
+                                to={`/shop?c=${cat.id}`}
+                                className={`block text-sm py-1.5 transition-colors ${isSelected ? 'font-bold text-accent' : 'font-medium text-slate-600 hover:text-primary'} ${level === 0 ? 'text-[15px]' : 'text-[13px]'}`}
+                            >
+                                {cat.name}
+                            </Link>
+                            {renderCategoryTree(cat.id, level + 1)}
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    };
+
+
+    const activeCategory = categories.find(c => c.id === categoryParam);
 
     return (
         <main className="max-w-7xl mx-auto px-4 md:px-6 py-6 bg-background-light text-slate-900 font-display">
             {/* Breadcrumbs */}
             <nav className="flex items-center gap-2 text-xs font-medium text-slate-500 mb-6 uppercase tracking-wider">
-                <a href="/" className="hover:text-primary">{language === 'en' ? 'Home' : 'Αρχική'}</a>
+                <Link to="/" className="hover:text-primary">{language === 'en' ? 'Home' : 'Αρχική'}</Link>
                 <span className="material-symbols-outlined text-sm">chevron_right</span>
-                <a href="/shop" className="hover:text-primary">{language === 'en' ? 'Shop' : 'Αγορές'}</a>
+                <Link to="/shop" className="hover:text-primary">{language === 'en' ? 'Shop' : 'Αγορές'}</Link>
                 <span className="material-symbols-outlined text-sm">chevron_right</span>
-                <span className="text-primary font-bold">{language === 'en' ? 'Brakes' : 'Φρένα'}</span>
+                {activeCategory ? (
+                    <span className="text-primary font-bold">{activeCategory.name}</span>
+                ) : categoryParam === 'all-categories' ? (
+                    <span className="text-primary font-bold">{language === 'en' ? 'All Products' : 'Όλα τα Προϊόντα'}</span>
+                ) : (
+                    <span className="text-primary font-bold">{language === 'en' ? 'Category' : 'Κατηγορία'}</span>
+                )}
             </nav>
 
             {/* Page Title & Header */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
                 <div>
                     <h1 className="text-3xl md:text-4xl font-black text-primary mb-2">
-                        {language === 'en' ? 'Brakes & Brake Parts' : 'Φρένα & Εξαρτήματα Φρένων'}
+                        {activeCategory ? activeCategory.name : categoryParam === 'all-categories' ? (language === 'en' ? 'All Products' : 'Όλα τα Προϊόντα') : (language === 'en' ? 'Products' : 'Προϊόντα')}
                     </h1>
-                    <p className="text-slate-500 max-w-xl">
-                        {language === 'en'
-                            ? 'Find premium braking systems, pads, and rotors engineered for maximum safety and performance.'
-                            : 'Βρείτε κορυφαία συστήματα πέδησης, τακάκια και δισκόπλακες σχεδιασμένα για μέγιστη ασφάλεια.'}
+                    <p className="text-slate-500 max-w-xl line-clamp-2">
+                        {activeCategory?.description || (language === 'en'
+                            ? 'Find premium parts and accessories engineered for maximum safety and performance.'
+                            : 'Βρείτε κορυφαία ανταλλακτικά και αξεσουάρ σχεδιασμένα για μέγιστη απόδοση και ασφάλεια.')}
                     </p>
                 </div>
 
@@ -120,7 +197,7 @@ export const Category: React.FC = () => {
                 </button>
 
                 {/* Sidebar (Filters) */}
-                <aside className={`w-full lg:w-72 shrink-0 space-y-6 ${isMobileFiltersOpen ? 'block' : 'hidden lg:block'}`}>
+                <aside className={`w - full lg: w - 72 shrink - 0 space - y - 6 ${isMobileFiltersOpen ? 'block' : 'hidden lg:block'} `}>
                     {/* My Garage Widget */}
                     <div className="bg-primary text-white rounded-xl p-5 shadow-lg relative overflow-hidden">
                         <div className="absolute -right-4 -bottom-4 opacity-10">
@@ -131,19 +208,45 @@ export const Category: React.FC = () => {
                                 {language === 'en' ? 'My Garage' : 'Το Γκαράζ Μου'}
                             </p>
                             {vehicle?.make ? (
-                                <h3 className="text-lg font-bold mb-3">{`${vehicle.make} ${vehicle.model} ${vehicle.year}`}</h3>
+                                <>
+                                    <h3 className="text-lg font-bold mb-3 line-clamp-2">{`${vehicle.make} ${vehicle.model} ${vehicle.year}`}</h3>
+                                    <div className="flex gap-2">
+                                        <button className="bg-white/10 hover:bg-white/20 transition-colors text-white text-xs font-bold px-3 py-1.5 rounded flex items-center gap-1">
+                                            <span className="material-symbols-outlined text-sm">edit</span>
+                                            {language === 'en' ? 'Edit' : 'Αλλαγή'}
+                                        </button>
+                                        <button className="bg-accent text-white text-xs font-bold px-3 py-1.5 rounded flex items-center gap-1" onClick={() => setCompatibleOnly(true)}>
+                                            <span className="material-symbols-outlined text-sm">garage</span>
+                                            {language === 'en' ? 'Filter Parts' : 'Φιλτράρισμα'}
+                                        </button>
+                                    </div>
+                                </>
                             ) : (
-                                <h3 className="text-lg font-bold mb-3">{language === 'en' ? 'No Vehicle Selected' : 'Δεν επιλέχθηκε όχημα'}</h3>
+                                <>
+                                    <h3 className="text-sm font-bold mb-3">{language === 'en' ? 'No Vehicle Selected' : 'Δεν επιλέχθηκε όχημα'}</h3>
+                                    <button className="bg-white/10 text-white hover:bg-white/20 transition-colors w-full text-xs font-bold px-3 py-2 rounded flex items-center justify-center gap-2">
+                                        <span className="material-symbols-outlined text-sm">add_circle</span>
+                                        {language === 'en' ? 'Add Vehicle' : 'Προσθήκη Οχήματος'}
+                                    </button>
+                                </>
                             )}
-                            <div className="flex gap-2">
-                                <button className="bg-white/10 hover:bg-white/20 transition-colors text-white text-xs font-bold px-3 py-1.5 rounded flex items-center gap-1">
-                                    <span className="material-symbols-outlined text-sm">edit</span>
-                                    {language === 'en' ? 'Edit' : 'Αλλαγή'}
-                                </button>
-                                <button className="bg-accent text-white text-xs font-bold px-3 py-1.5 rounded flex items-center gap-1">
-                                    <span className="material-symbols-outlined text-sm">garage</span>
-                                    {language === 'en' ? 'View All' : 'Προβολή Όλων'}
-                                </button>
+                        </div>
+                    </div>
+
+                    {/* Categories Navigation */}
+                    <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+                        <div className="p-5">
+                            <h4 className="text-sm font-black uppercase tracking-wider mb-4 text-primary">
+                                {language === 'en' ? 'Categories' : 'Κατηγορίες'}
+                            </h4>
+                            <div className="space-y-1">
+                                <Link
+                                    to="/shop?c=all-categories"
+                                    className={`block text-[15px] py-1.5 transition-colors ${categoryParam === 'all-categories' ? 'font-bold text-accent' : 'font-medium text-slate-600 hover:text-primary'}`}
+                                >
+                                    {language === 'en' ? 'All Categories' : 'Όλες οι Κατηγορίες'}
+                                </Link>
+                                {renderCategoryTree(null, 0)}
                             </div>
                         </div>
                     </div>
@@ -169,19 +272,15 @@ export const Category: React.FC = () => {
                                 {language === 'en' ? 'Brands' : 'Μάρκες'}
                             </h4>
                             <div className="space-y-3">
-                                {[
-                                    { name: 'Bosch', count: 124 },
-                                    { name: 'Brembo', count: 86 },
-                                    { name: 'Valeo', count: 52 },
-                                    { name: 'Ferodo', count: 41 },
-                                    { name: 'Castrol', count: 19 },
-                                ].map((b, i) => (
+                                {availableBrands.length > 0 ? availableBrands.map((b, i) => (
                                     <label key={i} className="flex items-center gap-3 cursor-pointer group">
                                         <input type="checkbox" checked={selectedBrands.includes(b.name)} onChange={() => toggleBrand(b.name)} className="rounded border-slate-300 text-accent focus:ring-accent w-4 h-4 cursor-pointer" />
                                         <span className="text-sm text-slate-600 group-hover:text-primary transition-colors">{b.name}</span>
                                         <span className="ml-auto text-[10px] font-bold text-slate-400">{b.count}</span>
                                     </label>
-                                ))}
+                                )) : (
+                                    <p className="text-sm text-slate-500 italic">{language === 'en' ? 'No brands found' : 'Δεν βρέθηκαν μάρκες'}</p>
+                                )}
                             </div>
                         </div>
 
@@ -191,19 +290,14 @@ export const Category: React.FC = () => {
                                 {language === 'en' ? 'Price Range' : 'Εύρος Τιμής'}
                             </h4>
                             <div className="px-2">
-                                <div className="h-1 bg-slate-200 rounded-full relative mb-6">
-                                    <div className="absolute h-1 bg-accent left-0 right-1/4 rounded-full"></div>
-                                    <div className="absolute size-4 bg-white border-2 border-accent rounded-full -top-1.5 left-0 cursor-pointer shadow-sm"></div>
-                                    <div className="absolute size-4 bg-white border-2 border-accent rounded-full -top-1.5 right-1/4 cursor-pointer shadow-sm"></div>
-                                </div>
-                                <div className="flex items-center justify-between gap-4">
+                                <div className="flex items-center justify-between gap-4 mb-4">
                                     <div className="flex-1">
                                         <span className="text-[10px] text-slate-400 font-bold block mb-1">
                                             {language === 'en' ? 'MIN' : 'ΕΛΑΧ'}
                                         </span>
                                         <div className="relative">
                                             <span className="absolute left-2 top-1.5 text-xs text-slate-400">€</span>
-                                            <input type="number" value={minPrice} onChange={(e) => setMinPrice(Number(e.target.value))} className="w-full pl-5 pr-2 py-1.5 text-xs border border-slate-200 rounded-lg font-bold focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent" />
+                                            <input type="number" min="0" value={minPrice} onChange={(e) => setMinPrice(Number(e.target.value))} className="w-full pl-5 pr-2 py-1.5 text-xs border border-slate-200 rounded-lg font-bold focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent" />
                                         </div>
                                     </div>
                                     <div className="flex-1">
@@ -212,8 +306,22 @@ export const Category: React.FC = () => {
                                         </span>
                                         <div className="relative">
                                             <span className="absolute left-2 top-1.5 text-xs text-slate-400">€</span>
-                                            <input type="number" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} className="w-full pl-5 pr-2 py-1.5 text-xs border border-slate-200 rounded-lg font-bold focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent" />
+                                            <input type="number" min="0" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} className="w-full pl-5 pr-2 py-1.5 text-xs border border-slate-200 rounded-lg font-bold focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent" />
                                         </div>
+                                    </div>
+                                </div>
+                                <div className="space-y-4">
+                                    <input
+                                        type="range"
+                                        min="0"
+                                        max="2000"
+                                        value={maxPrice}
+                                        onChange={(e) => setMaxPrice(Number(e.target.value))}
+                                        className="w-full accent-primary bg-slate-200 rounded-lg appearance-none cursor-pointer h-1.5"
+                                    />
+                                    <div className="flex justify-between text-xs text-slate-400 font-bold">
+                                        <span>€0</span>
+                                        <span>€2000+</span>
                                     </div>
                                 </div>
                             </div>
@@ -260,7 +368,7 @@ export const Category: React.FC = () => {
                                         {compatibleOnly && (
                                             <div className="absolute top-4 left-4 bg-green-500 text-white text-[10px] font-black px-2 py-0.5 rounded uppercase flex items-center gap-1 shadow-sm">
                                                 <span className="material-symbols-outlined text-xs">check_circle</span>
-                                                {language === 'en' ? `Fits your ${vehicle?.make || 'Car'}` : `Ταιριάζει στο οχημα`}
+                                                {language === 'en' ? `Fits your ${vehicle?.make || 'Car'} ` : `Ταιριάζει στο οχημα`}
                                             </div>
                                         )}
                                         {prod.in_stock === 0 && (
@@ -283,7 +391,7 @@ export const Category: React.FC = () => {
                                                 </div>
                                             )}
                                         </div>
-                                        <a href={`/product/${prod.id}`} className="text-sm font-bold text-primary group-hover:text-accent transition-colors line-clamp-2 mb-4 h-10 block">
+                                        <a href={`/ product / ${prod.id} `} className="text-sm font-bold text-primary group-hover:text-accent transition-colors line-clamp-2 mb-4 h-10 block">
                                             {prod.name}
                                         </a>
                                         <div className="flex items-center justify-between mt-auto">
