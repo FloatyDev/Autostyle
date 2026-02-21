@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import { useCustomerAuth } from '../context/CustomerAuthContext';
 
 export const Header: React.FC = () => {
-    const { language, setLanguage, cart, setIsCartOpen } = useAppContext();
+    const { language, setLanguage, cart } = useAppContext();
     const { isAuthenticated, user, logout } = useCustomerAuth();
 
+    const navigate = useNavigate();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -139,12 +140,15 @@ export const Header: React.FC = () => {
 
                             <button
                                 className="text-white/80 hover:text-white flex items-center relative"
-                                onClick={() => setIsCartOpen(true)}
+                                onClick={() => navigate('/checkout')}
+                                aria-label="Go to checkout"
                             >
                                 <span className="material-symbols-outlined">shopping_cart</span>
-                                <span className="absolute -top-2 -right-2 bg-accent text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
-                                    {cartItemsCount}
-                                </span>
+                                {cartItemsCount > 0 && (
+                                    <span className="absolute -top-2 -right-2 bg-accent text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
+                                        {cartItemsCount}
+                                    </span>
+                                )}
                             </button>
                         </div>
                     </div>

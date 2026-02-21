@@ -3,7 +3,7 @@ import { VehicleSelector } from '../components/VehicleSelector';
 import { useAppContext } from '../context/AppContext';
 
 export const Home: React.FC = () => {
-    const { language } = useAppContext();
+    const { language, addToCart, setIsCartOpen } = useAppContext();
 
     const featured = [
         { id: 1, name: 'Carbon Ceramic Brake Kit', price: 429.00, brand: 'Brembo', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCiuEAPVr1rqDjKc3iGFxU1RFW8_MZs10z8y810lE3PH5IAKKNb_DRrDepkngCPG68zECOQkosABnfglf2jpSn9QUoiBizenDvItQKE1oRmlQrhD_oUvJ-YENP2fCUzI5NCyYN3gHq1SDNGGTgO0kEMThaQpkdABj1ocohnCqeCBuY-z2bV0KLmrL8XJUxVoJOHL2zlCmPd3Dnn69eXoSnpgnnWRxCV-06pG83yFX7VMxCPSLkC2JJUdYu_NkGzFU8HqKNhDMOEtDc', hot: true },
@@ -99,7 +99,20 @@ export const Home: React.FC = () => {
                                     <h3 className="font-bold text-slate-900 mb-2 truncate">{prod.name}</h3>
                                     <div className="flex items-center justify-between">
                                         <span className="text-lg font-black text-primary">€{prod.price.toFixed(2)}</span>
-                                        <button className="bg-primary text-white p-2.5 rounded-full hover:bg-accent hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+                                        <button
+                                            className="bg-primary text-white p-2.5 rounded-full hover:bg-accent hover:shadow-lg transition-all transform hover:-translate-y-0.5"
+                                            onClick={() => {
+                                                addToCart({
+                                                    id: String(prod.id),
+                                                    name: prod.name,
+                                                    price: prod.price,
+                                                    quantity: 1,
+                                                    image: prod.image,
+                                                });
+                                                setIsCartOpen(true);
+                                            }}
+                                            aria-label={`Add ${prod.name} to cart`}
+                                        >
                                             <span className="material-symbols-outlined text-xl block" style={{ fontVariationSettings: "'FILL' 1" }}>shopping_bag</span>
                                         </button>
                                     </div>

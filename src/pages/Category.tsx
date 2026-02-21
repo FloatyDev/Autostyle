@@ -15,7 +15,7 @@ interface Product {
 }
 
 export const Category: React.FC = () => {
-    const { language, vehicle } = useAppContext();
+    const { language, vehicle, addToCart, setIsCartOpen } = useAppContext();
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const categoryParam = queryParams.get('c') || 'all-categories';
@@ -399,7 +399,21 @@ export const Category: React.FC = () => {
                                                 {prod.original_price && <span className="text-xs text-slate-400 line-through">€{Number(prod.original_price).toFixed(2)}</span>}
                                                 <span className="text-xl font-black text-primary">€{Number(prod.price).toFixed(2)}</span>
                                             </div>
-                                            <button className="size-10 bg-primary text-white rounded-lg flex items-center justify-center hover:bg-accent transition-all shadow-md">
+                                            <button
+                                                className="size-10 bg-primary text-white rounded-lg flex items-center justify-center hover:bg-accent transition-all shadow-md"
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    addToCart({
+                                                        id: prod.id,
+                                                        name: prod.name,
+                                                        price: Number(prod.price),
+                                                        quantity: 1,
+                                                        image: prod.image,
+                                                    });
+                                                    setIsCartOpen(true);
+                                                }}
+                                                aria-label={`Add ${prod.name} to cart`}
+                                            >
                                                 <span className="material-symbols-outlined">add_shopping_cart</span>
                                             </button>
                                         </div>
