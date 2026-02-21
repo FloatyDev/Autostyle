@@ -4,6 +4,9 @@ import { Home } from './pages/Home';
 import { Category } from './pages/Category';
 import { Product } from './pages/Product';
 import { Checkout } from './pages/Checkout';
+import { Login as CustomerLogin } from './pages/Login';
+import { Register as CustomerRegister } from './pages/Register';
+import { Account } from './pages/Account';
 
 // Admin Imports
 import { AuthProvider } from './context/AuthContext';
@@ -25,6 +28,9 @@ function App() {
             <Route path="shop" element={<Category />} />
             <Route path="product/:id" element={<Product />} />
             <Route path="checkout" element={<Checkout />} />
+            <Route path="login" element={<CustomerLogin />} />
+            <Route path="register" element={<CustomerRegister />} />
+            <Route path="account" element={<Account />} />
           </Route>
 
           {/* Admin Auth Route */}

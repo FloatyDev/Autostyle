@@ -20,8 +20,23 @@ $router->get('/', function () {
     echo json_encode(["message" => "Autostyle API is running"]);
 });
 
-// Auth Route
+// Auth Route (Admin)
 $router->post('/api/auth/login', 'AuthController@login');
+
+// Customer Auth Routes
+$router->post('/api/auth/customer/register', 'CustomerAuthController@register');
+$router->post('/api/auth/customer/login', 'CustomerAuthController@login');
+
+// Protected Customer Routes
+$router->before('GET|POST|PUT|DELETE', '/api/customer/.*', function () {
+    $middleware = new \App\Middleware\CustomerAuthMiddleware();
+    $middleware->handle();
+});
+
+$router->mount('/api/customer', function () use ($router) {
+    $router->get('/profile', 'CustomerAuthController@getProfile');
+    $router->put('/profile', 'CustomerAuthController@updateProfile');
+});
 
 // Protected Admin Routes
 $router->before('GET|POST|PUT|DELETE', '/api/admin/.*', function () {

@@ -70,6 +70,33 @@ try {
     ) ENGINE=InnoDB");
     echo "Product-Vehicles table created.\n";
 
+    // 5. Create Users Table (Customers)
+    $db->exec("CREATE TABLE IF NOT EXISTS users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        email VARCHAR(100) NOT NULL UNIQUE,
+        password_hash VARCHAR(255) NOT NULL,
+        first_name VARCHAR(100) NOT NULL,
+        last_name VARCHAR(100) NOT NULL,
+        phone VARCHAR(50) NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB");
+    echo "Users table created.\n";
+
+    // 6. Create User Addresses Table
+    $db->exec("CREATE TABLE IF NOT EXISTS user_addresses (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT NOT NULL,
+        type VARCHAR(50) DEFAULT 'shipping',
+        street VARCHAR(255) NOT NULL,
+        city VARCHAR(100) NOT NULL,
+        postal_code VARCHAR(20) NOT NULL,
+        country VARCHAR(100) NOT NULL,
+        is_default BOOLEAN DEFAULT FALSE,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    ) ENGINE=InnoDB");
+    echo "User Addresses table created.\n";
+
     // Seeding Admin
     $adminPassword = password_hash('password123', PASSWORD_DEFAULT);
     $stmt = $db->prepare("INSERT IGNORE INTO admins (email, password_hash) VALUES (?, ?)");
