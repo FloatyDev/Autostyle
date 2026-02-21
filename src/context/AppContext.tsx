@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 
 export type Language = 'en' | 'gr';
@@ -38,10 +38,28 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [language, setLanguage] = useState<Language>('en'); // Could detect from browser, default to en for now
+    const [language, setLanguage] = useState<Language>('en');
     const [vehicle, setVehicle] = useState<Vehicle | null>(null);
-    const [cart, setCart] = useState<CartItem[]>([]);
+
+    // Load cart from localStorage on first render
+    const [cart, setCart] = useState<CartItem[]>(() => {
+        try {
+            const saved = localStorage.getItem('autostyle_cart');
+            return saved ? JSON.parse(saved) : [];
+        } catch {
+            return [];
+        }
+    });
     const [isCartOpen, setIsCartOpen] = useState(false);
+
+    // Persist cart to localStorage whenever it changes
+    useEffect(() => {
+        try {
+            localStorage.setItem('autostyle_cart', JSON.stringify(cart));
+        } catch {
+            // Storage might be full or unavailable — fail silently
+        }
+    }, [cart]);
 
     const addToCart = (newItem: CartItem) => {
         setCart((prev) => {
