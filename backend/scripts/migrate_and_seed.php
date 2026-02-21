@@ -97,6 +97,38 @@ try {
     ) ENGINE=InnoDB");
     echo "User Addresses table created.\n";
 
+    // 7. Create Orders Table
+    $db->exec("CREATE TABLE IF NOT EXISTS orders (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        customer_name VARCHAR(255) NOT NULL,
+        customer_email VARCHAR(255) NOT NULL,
+        user_id INT NULL,
+        total_amount DECIMAL(10, 2) NOT NULL,
+        status VARCHAR(50) DEFAULT 'pending_payment',
+        shipping_address TEXT NOT NULL,
+        city VARCHAR(100) NOT NULL,
+        postal_code VARCHAR(20) NOT NULL,
+        country VARCHAR(100) NOT NULL,
+        phone VARCHAR(50) NULL,
+        stripe_payment_intent_id VARCHAR(255) NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+    ) ENGINE=InnoDB");
+    echo "Orders table created.\n";
+
+    // 8. Create Order Items Table
+    $db->exec("CREATE TABLE IF NOT EXISTS order_items (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        order_id INT NOT NULL,
+        product_id VARCHAR(50) NOT NULL,
+        quantity INT NOT NULL,
+        price_at_purchase DECIMAL(10, 2) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+        FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE RESTRICT
+    ) ENGINE=InnoDB");
+    echo "Order Items table created.\n";
+
     // Seeding Admin
     $adminPassword = password_hash('password123', PASSWORD_DEFAULT);
     $stmt = $db->prepare("INSERT IGNORE INTO admins (email, password_hash) VALUES (?, ?)");

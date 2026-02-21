@@ -73,6 +73,9 @@ $router->mount('/api', function () use ($router) {
     $router->get('/vehicles/makes', 'VehicleController@makes');
     $router->get('/vehicles/models/([^/]+)', 'VehicleController@models'); // Pass make as arg
     $router->get('/vehicles/years/([^/]+)/([^/]+)', 'VehicleController@years'); // Pass make, model
+
+    // Orders
+    $router->post('/orders/checkout', 'OrderController@checkout');
 });
 
 // Run it!

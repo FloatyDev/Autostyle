@@ -29,6 +29,7 @@ interface AppContextType {
     addToCart: (item: CartItem) => void;
     removeFromCart: (itemId: string) => void;
     updateQuantity: (itemId: string, quantity: number) => void;
+    clearCart: () => void;
     isCartOpen: boolean;
     setIsCartOpen: (isOpen: boolean) => void;
     cartTotal: number;
@@ -59,6 +60,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         setCart((prev) => prev.filter((item) => item.id !== itemId));
     };
 
+    const clearCart = () => {
+        setCart([]);
+    };
+
     const updateQuantity = (itemId: string, quantity: number) => {
         if (quantity <= 0) {
             removeFromCart(itemId);
@@ -80,6 +85,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
                 addToCart,
                 removeFromCart,
                 updateQuantity,
+                clearCart,
                 isCartOpen,
                 setIsCartOpen,
                 cartTotal,
