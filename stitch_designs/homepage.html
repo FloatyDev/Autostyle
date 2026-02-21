@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Autostyle | Precision Car Parts &amp; Spares</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1b1b1d",
+                        "accent-red": "#E5232A",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#191919",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .bg-hero-overlay { background: linear-gradient(rgba(27, 27, 29, 0.7), rgba(27, 27, 29, 0.85)); }
+        .custom-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<!-- Header -->
+<header class="sticky top-0 z-50 w-full bg-primary border-b border-white/10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<!-- Logo -->
+<div class="flex items-center gap-2">
+<div class="bg-accent-red p-1.5 rounded text-white">
+<span class="material-symbols-outlined block">settings_input_component</span>
+</div>
+<span class="text-white text-xl font-black tracking-tighter uppercase italic">Autostyle</span>
+</div>
+<!-- Main Nav -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-white/80 hover:text-white text-sm font-semibold transition-colors" href="#">Shop</a>
+<a class="text-white/80 hover:text-white text-sm font-semibold transition-colors" href="#">Brands</a>
+<a class="text-white/80 hover:text-white text-sm font-semibold transition-colors" href="#">Deals</a>
+<a class="text-white/80 hover:text-white text-sm font-semibold transition-colors" href="#">About</a>
+<a class="text-white/80 hover:text-white text-sm font-semibold transition-colors" href="#">Contact</a>
+</nav>
+<!-- Utility Icons -->
+<div class="flex items-center gap-4">
+<button class="text-white/80 hover:text-white flex items-center">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="bg-white/10 text-white px-2 py-1 rounded text-xs font-bold hover:bg-white/20 transition-colors">GR/EN</button>
+<button class="text-white/80 hover:text-white flex items-center">
+<span class="material-symbols-outlined">person</span>
+</button>
+<button class="text-white/80 hover:text-white flex items-center relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute -top-2 -right-2 bg-accent-red text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">0</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="relative h-[600px] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Dark automotive workshop with mechanical tools and car lift" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDeDIZ_MCyXa3lIFvcSLdYGBuvcZlf6iq6wb2QQ_cUhdArkCZx0TLUgflXNni4H2lPxHmL1arFgZuKFKc0_8iKECXMG_TneEniSXnnQkE-lkFS7gzDF2It7msE0wOJLtJudDN9RfVRDAD3V08fdr7Kk2pqadZoXU-0d0FqXXioU2ea-R4VWjqJ2nktZQCHXUU4AUhriHm2cgA3_5XW_UqqkIwig3ly_BfX3Gs0y5pKpEr7eyp3MkkbBlXLyVvDx-SDEkpAKXSym41w');"></div>
+<div class="absolute inset-0 bg-hero-overlay"></div>
+<div class="relative z-10 max-w-5xl w-full px-4 text-center">
+<h1 class="text-white text-5xl md:text-6xl font-black tracking-tight mb-4">Precision parts. Simple.</h1>
+<p class="text-white/70 text-lg md:text-xl mb-12">The right part, right away. Guaranteed compatibility.</p>
+<!-- Vehicle Selector Widget -->
+<div class="bg-white p-2 rounded-xl shadow-2xl flex flex-col md:flex-row items-stretch gap-2 max-w-4xl mx-auto">
+<div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-2 p-2">
+<div class="flex flex-col text-left">
+<label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-1">Make</label>
+<select class="custom-select w-full border-none focus:ring-0 text-slate-900 font-semibold py-1 px-3">
+<option>Select Make</option>
+<option>BMW</option>
+<option>Audi</option>
+<option>Volkswagen</option>
+<option>Mercedes-Benz</option>
+</select>
+</div>
+<div class="flex flex-col text-left border-t md:border-t-0 md:border-l border-slate-100">
+<label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-1 mt-2 md:mt-0">Model</label>
+<select class="custom-select w-full border-none focus:ring-0 text-slate-900 font-semibold py-1 px-3">
+<option>Select Model</option>
+</select>
+</div>
+<div class="flex flex-col text-left border-t md:border-t-0 md:border-l border-slate-100">
+<label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-1 mt-2 md:mt-0">Year</label>
+<select class="custom-select w-full border-none focus:ring-0 text-slate-900 font-semibold py-1 px-3">
+<option>Select Year</option>
+</select>
+</div>
+</div>
+<button class="bg-accent-red hover:bg-red-700 text-white px-8 py-4 rounded-lg font-bold text-base transition-all transform hover:scale-[1.02] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-xl">search</span>
+                    Find Parts
+                </button>
+</div>
+</div>
+</section>
+<!-- Trust Bar -->
+<section class="bg-white border-b border-slate-200 py-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="flex items-center justify-center md:justify-start gap-4">
+<span class="material-symbols-outlined text-accent-red text-3xl">local_shipping</span>
+<div>
+<h4 class="font-bold text-slate-900 leading-tight">Fast Delivery</h4>
+<p class="text-sm text-slate-500">Same-day shipping across Greece</p>
+</div>
+</div>
+<div class="flex items-center justify-center gap-4 border-y md:border-y-0 md:border-x border-slate-100 py-6 md:py-0">
+<span class="material-symbols-outlined text-accent-red text-3xl">verified</span>
+<div>
+<h4 class="font-bold text-slate-900 leading-tight">Genuine Parts</h4>
+<p class="text-sm text-slate-500">Certified OEM quality parts only</p>
+</div>
+</div>
+<div class="flex items-center justify-center md:justify-end gap-4">
+<span class="material-symbols-outlined text-accent-red text-3xl">location_on</span>
+<div>
+<h4 class="font-bold text-slate-900 leading-tight">Store in Heraklion</h4>
+<p class="text-sm text-slate-500">Visit us for expert advice</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Category Grid -->
+<section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-end justify-between mb-8">
+<div>
+<h2 class="text-3xl font-black text-primary tracking-tight">Shop by Category</h2>
+<div class="h-1.5 w-12 bg-accent-red mt-2"></div>
+</div>
+<a class="text-accent-red font-bold text-sm flex items-center gap-1 hover:underline" href="#">View All Categories <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+<!-- Category Cards -->
+<a class="group bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md hover:border-accent-red/20 transition-all text-center" href="#">
+<span class="material-symbols-outlined text-4xl text-slate-400 group-hover:text-accent-red transition-colors mb-3">settings</span>
+<p class="font-bold text-sm text-slate-700">Engine</p>
+</a>
+<a class="group bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md hover:border-accent-red/20 transition-all text-center" href="#">
+<span class="material-symbols-outlined text-4xl text-slate-400 group-hover:text-accent-red transition-colors mb-3">album</span>
+<p class="font-bold text-sm text-slate-700">Brakes</p>
+</a>
+<a class="group bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md hover:border-accent-red/20 transition-all text-center" href="#">
+<span class="material-symbols-outlined text-4xl text-slate-400 group-hover:text-accent-red transition-colors mb-3">tire_repair</span>
+<p class="font-bold text-sm text-slate-700">Suspension</p>
+</a>
+<a class="group bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md hover:border-accent-red/20 transition-all text-center" href="#">
+<span class="material-symbols-outlined text-4xl text-slate-400 group-hover:text-accent-red transition-colors mb-3">bolt</span>
+<p class="font-bold text-sm text-slate-700">Electrical</p>
+</a>
+<a class="group bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md hover:border-accent-red/20 transition-all text-center" href="#">
+<span class="material-symbols-outlined text-4xl text-slate-400 group-hover:text-accent-red transition-colors mb-3">directions_car</span>
+<p class="font-bold text-sm text-slate-700">Body &amp; Exterior</p>
+</a>
+<a class="group bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md hover:border-accent-red/20 transition-all text-center" href="#">
+<span class="material-symbols-outlined text-4xl text-slate-400 group-hover:text-accent-red transition-colors mb-3">opacity</span>
+<p class="font-bold text-sm text-slate-700">Filters &amp; Fluids</p>
+</a>
+</div>
+</section>
+<!-- Featured Products -->
+<section class="py-16 bg-slate-100">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<h2 class="text-3xl font-black text-primary tracking-tight mb-8 text-center">Featured Products</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Product Card 1 -->
+<div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group">
+<div class="h-48 bg-white relative p-4 flex items-center justify-center">
+<img class="h-full object-contain" data-alt="High performance car brake disc and pads" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiuEAPVr1rqDjKc3iGFxU1RFW8_MZs10z8y810lE3PH5IAKKNb_DRrDepkngCPG68zECOQkosABnfglf2jpSn9QUoiBizenDvItQKE1oRmlQrhD_oUvJ-YENP2fCUzI5NCyYN3gHq1SDNGGTgO0kEMThaQpkdABj1ocohnCqeCBuY-z2bV0KLmrL8XJUxVoJOHL2zlCmPd3Dnn69eXoSnpgnnWRxCV-06pG83yFX7VMxCPSLkC2JJUdYu_NkGzFU8HqKNhDMOEtDc"/>
+<span class="absolute top-2 right-2 bg-accent-red text-white text-[10px] font-black px-2 py-1 rounded">HOT DEAL</span>
+</div>
+<div class="p-5">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Brembo</p>
+<h3 class="font-bold text-slate-900 mb-2 truncate">Carbon Ceramic Brake Kit</h3>
+<div class="flex items-center justify-between">
+<span class="text-lg font-black text-primary">€429.00</span>
+<button class="bg-primary text-white p-2 rounded hover:bg-accent-red transition-colors">
+<span class="material-symbols-outlined text-xl">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group">
+<div class="h-48 bg-white relative p-4 flex items-center justify-center">
+<img class="h-full object-contain" data-alt="Iridium car spark plug close up" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0RVyIpAWUcsQ3opndmfAf7Mds31L5-ut2l-t1og7HlUMn8pG2MD-lPKcPN29w59ae5s5HnZvfje-7LS8meNty7Lx0nV40TY7_ubg52xeqp4X_uZ1VypEnByxIdseCaaiyOKvGQp4Ylk0vjV9VZo-46Nr488iHxexlGGgFg2BH1cW-Zfgp-mkLv8fVb_K7BiPfnoCJNOna8bb-fG-8khHPobaf9MHFvl2ich43wU90CzBCIhHR9nqvKkjUPZghyRsDqgUbm5AgL_s"/>
+</div>
+<div class="p-5">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">NGK</p>
+<h3 class="font-bold text-slate-900 mb-2 truncate">Laser Iridium Spark Plug</h3>
+<div class="flex items-center justify-between">
+<span class="text-lg font-black text-primary">€18.50</span>
+<button class="bg-primary text-white p-2 rounded hover:bg-accent-red transition-colors">
+<span class="material-symbols-outlined text-xl">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group">
+<div class="h-48 bg-white relative p-4 flex items-center justify-center">
+<img class="h-full object-contain" data-alt="Performance synthetic engine oil bottle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9FB-nKzqVpvmBgCI0Oo-M_UUwdubERg3QDJlbGaX7S82spL4F1RklyDaqcDj_6A1aY05WyjjZ8R7ES8TVT20s-AzK6SvPFbOQDUmLyrb4_3D6-n-lAfgkhedj2JGv6IacXYN5h96p32Dh0bM815W65DYal8jbIAjsi7MMkC1ihYkiUyG1tHxXXt0WTp1qNMsNG5RdFb50M-zXY7gie4di1hbCosxohGBXxvQ7FIWx_ITBM496QVKOmfJNQ8qEo11TDmBeLrrLags"/>
+</div>
+<div class="p-5">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Castrol</p>
+<h3 class="font-bold text-slate-900 mb-2 truncate">Edge 5W-30 Synthetic (5L)</h3>
+<div class="flex items-center justify-between">
+<span class="text-lg font-black text-primary">€54.90</span>
+<button class="bg-primary text-white p-2 rounded hover:bg-accent-red transition-colors">
+<span class="material-symbols-outlined text-xl">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group">
+<div class="h-48 bg-white relative p-4 flex items-center justify-center">
+<img class="h-full object-contain" data-alt="Modern car headlamp assembly" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCt7w3wkCxWclyt9i4qQPQqoao-ZkHDoV4Sznn3JcsLiZKqIT-2FaDuHBJBVhuffuiUCq6jenS1aqCLz5kQp9N1KHq6u5gn-Z4dfFDfRYgWJR7jfyFgjppVN3h8vDqvEYm-_QiialQ791HKBiSjjnPYl3oEp4ZcDKDGu2FrY0wxMoxzUo0hr_MMja-G_pUf7UV43ihkuq5kMBmcS_d5xtGTp0WONJzU9P9Y6NSQObiEbRrVFPU7lTD6V_Xx-bFyVzbs3mTRWPfO3kI"/>
+</div>
+<div class="p-5">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Valeo</p>
+<h3 class="font-bold text-slate-900 mb-2 truncate">LED Headlight Assembly</h3>
+<div class="flex items-center justify-between">
+<span class="text-lg font-black text-primary">€185.00</span>
+<button class="bg-primary text-white p-2 rounded hover:bg-accent-red transition-colors">
+<span class="material-symbols-outlined text-xl">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Popular Brands -->
+<section class="py-12 border-y border-slate-200">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<p class="text-center text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-8">Authorised Distributor of Trusted Brands</p>
+<div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-40 grayscale hover:grayscale-0 transition-all">
+<span class="text-2xl font-black italic text-slate-800">BOSCH</span>
+<span class="text-2xl font-black italic text-slate-800">NGK</span>
+<span class="text-2xl font-black italic text-slate-800">brembo</span>
+<span class="text-2xl font-black italic text-slate-800">Castrol</span>
+<span class="text-2xl font-black italic text-slate-800">Valeo</span>
+<span class="text-2xl font-black italic text-slate-800">MANN</span>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-primary text-white pt-16 pb-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+<!-- Brand & Address -->
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-6">
+<div class="bg-accent-red p-1.5 rounded text-white">
+<span class="material-symbols-outlined block text-sm">settings_input_component</span>
+</div>
+<span class="text-xl font-black tracking-tighter uppercase italic">Autostyle</span>
+</div>
+<p class="text-white/60 text-sm leading-relaxed mb-4">
+                        Your trusted partner for high-quality automotive spare parts in Crete and beyond.
+                    </p>
+<div class="flex flex-col gap-2 text-sm text-white/60">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span>Ikarou 12, Heraklion, 71307</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">call</span>
+<span>+30 2810 123 456</span>
+</div>
+</div>
+</div>
+<!-- Links 1 -->
+<div>
+<h5 class="font-bold mb-6">Quick Links</h5>
+<ul class="space-y-4 text-sm text-white/60">
+<li><a class="hover:text-accent-red transition-colors" href="#">Shop All Parts</a></li>
+<li><a class="hover:text-accent-red transition-colors" href="#">Latest Deals</a></li>
+<li><a class="hover:text-accent-red transition-colors" href="#">Bulk Orders</a></li>
+<li><a class="hover:text-accent-red transition-colors" href="#">Track Your Order</a></li>
+</ul>
+</div>
+<!-- Links 2 -->
+<div>
+<h5 class="font-bold mb-6">Company</h5>
+<ul class="space-y-4 text-sm text-white/60">
+<li><a class="hover:text-accent-red transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-accent-red transition-colors" href="#">Contact Support</a></li>
+<li><a class="hover:text-accent-red transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-accent-red transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<!-- Newsletter -->
+<div>
+<h5 class="font-bold mb-6">Stay Updated</h5>
+<p class="text-sm text-white/60 mb-4">Subscribe for technical tips and exclusive discounts.</p>
+<form class="flex gap-2">
+<input class="bg-white/5 border-white/10 rounded-lg focus:ring-accent-red focus:border-accent-red text-sm w-full" placeholder="Your email" type="email"/>
+<button class="bg-accent-red px-4 rounded-lg hover:bg-red-700 transition-colors" type="submit">
+<span class="material-symbols-outlined">send</span>
+</button>
+</form>
+</div>
+</div>
+<div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs text-white/40">© 2024 Autostyle Parts &amp; Spares. All rights reserved.</p>
+<div class="flex items-center gap-6">
+<a class="text-white/40 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-white/40 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+<a class="text-white/40 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">thumb_up</span></a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

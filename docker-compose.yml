@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  autostyle-ui:
+    build: .
+    container_name: autostyle-sandbox
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      # An anonymous volume for node_modules ensures that host OS (Windows)
+      # doesn't mess with Linux binaries inside container's node_modules
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true # Useful for Docker on Windows to pick up file changes
+    command: sh -c "if [ ! -d node_modules/vite ]; then npm install; fi && npm run dev -- --host"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+    container_name: autostyle-backend
+    ports:
+      - "8000:80"
+    volumes:
+      - ./backend:/var/www/html
+    environment:
+      - DB_HOST=db
+      - DB_DATABASE=autostyle
+      - DB_USERNAME=root
+      - DB_PASSWORD=rootpassword
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.0
+    container_name: autostyle-db
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=autostyle
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+
+volumes:
+  db_data:

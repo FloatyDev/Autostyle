@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Autostyle - Brakes &amp; Brake Parts</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1b1b1d",
+                        "accent": "#E5232A",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#191919",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .accent-red { color: #E5232A; }
+        .bg-accent-red { background-color: #E5232A; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark px-4 md:px-10 py-3">
+<div class="max-w-7xl mx-auto flex items-center justify-between whitespace-nowrap">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2 text-primary dark:text-white">
+<div class="size-8 bg-primary dark:bg-white flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-white dark:text-primary text-xl">directions_car</span>
+</div>
+<h2 class="text-xl font-black leading-tight tracking-tight uppercase">Autostyle</h2>
+</div>
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-sm font-semibold hover:text-accent transition-colors" href="#">Shop</a>
+<a class="text-sm font-semibold hover:text-accent transition-colors" href="#">My Garage</a>
+<a class="text-sm font-semibold hover:text-accent transition-colors" href="#">Deals</a>
+<a class="text-sm font-semibold hover:text-accent transition-colors" href="#">Support</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+<div class="hidden md:flex w-full max-w-xs relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary" placeholder="Search parts, brands..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors relative">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-1 right-1 bg-accent text-white text-[10px] font-bold px-1 rounded-full min-w-[16px] h-4 flex items-center justify-center border-2 border-white dark:border-background-dark">2</span>
+</button>
+<div class="size-9 rounded-full bg-slate-200 overflow-hidden ml-2 border border-slate-200">
+<img alt="User Profile" data-alt="User profile circular avatar image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyhb3Vbx7-3XEqyi6RqTCORZ0MnL6TlJCZYL-Wlx8z1fDaTGjz2w9Osc54iWxkXr0GwTEMUYu2hrRSfckOT-8JUU5JwHHQltaPobNK0wZbzzNtHYxldNfcQ5QNRg0AXgOfhddl2eNx6S9auHYwBiQpCV5zqjADcEOtQ7U9aeH-MsP9brK47tbL--dWI9g8nsDD09BcjJSOmZtN1gDGj_mFXcbM5wBJzTv2b1r4icGuZXGp2sFYeMnfxBMesSGinAcS9Qv_5Kom6Go"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 md:px-6 py-6">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-xs font-medium text-slate-500 mb-6 uppercase tracking-wider">
+<a class="hover:text-primary" href="#">Home</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<a class="hover:text-primary" href="#">Shop</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary font-bold">Brakes</span>
+</nav>
+<!-- Page Title & Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<h1 class="text-3xl md:text-4xl font-black text-primary dark:text-white mb-2">Brakes &amp; Brake Parts</h1>
+<p class="text-slate-500 max-w-xl">Find premium braking systems, pads, and rotors engineered for maximum safety and performance.</p>
+</div>
+<div class="flex items-center gap-4 bg-white dark:bg-slate-900 p-2 rounded-lg border border-slate-200 dark:border-slate-800">
+<span class="text-xs font-bold text-slate-400 pl-2">SORT BY:</span>
+<select class="border-none bg-transparent text-sm font-bold focus:ring-0 py-1 pr-8 cursor-pointer">
+<option>Relevance</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+<option>Newest Arrivals</option>
+</select>
+</div>
+</div>
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Sidebar (Filters) -->
+<aside class="w-full lg:w-72 shrink-0 space-y-6">
+<!-- My Garage Widget -->
+<div class="bg-primary text-white rounded-xl p-5 shadow-lg relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-8xl">directions_car</span>
+</div>
+<div class="relative z-10">
+<p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">My Garage</p>
+<h3 class="text-lg font-bold mb-3">Toyota Yaris 2018</h3>
+<div class="flex gap-2">
+<button class="bg-white/10 hover:bg-white/20 transition-colors text-white text-xs font-bold px-3 py-1.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">edit</span> Edit
+                            </button>
+<button class="bg-accent text-white text-xs font-bold px-3 py-1.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">garage</span> View All
+                            </button>
+</div>
+</div>
+</div>
+<!-- Main Filters Container -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+<!-- Compatibility Toggle -->
+<div class="p-5 border-b border-slate-100 dark:border-slate-800">
+<label class="flex items-center justify-between cursor-pointer">
+<span class="text-sm font-bold text-primary dark:text-white">Compatible parts only</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-accent"></div>
+</div>
+</label>
+</div>
+<!-- Brand Filter -->
+<div class="p-5 border-b border-slate-100 dark:border-slate-800">
+<h4 class="text-sm font-black uppercase tracking-wider mb-4">Brands</h4>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded border-slate-300 text-accent focus:ring-accent" type="checkbox"/>
+<span class="text-sm text-slate-600 group-hover:text-primary transition-colors">Bosch</span>
+<span class="ml-auto text-[10px] font-bold text-slate-400">124</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded border-slate-300 text-accent focus:ring-accent" type="checkbox"/>
+<span class="text-sm text-slate-600 group-hover:text-primary transition-colors">Brembo</span>
+<span class="ml-auto text-[10px] font-bold text-slate-400">86</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-slate-300 text-accent focus:ring-accent" type="checkbox"/>
+<span class="text-sm text-slate-600 group-hover:text-primary transition-colors">Valeo</span>
+<span class="ml-auto text-[10px] font-bold text-slate-400">52</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-slate-300 text-accent focus:ring-accent" type="checkbox"/>
+<span class="text-sm text-slate-600 group-hover:text-primary transition-colors">Ferodo</span>
+<span class="ml-auto text-[10px] font-bold text-slate-400">41</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-slate-300 text-accent focus:ring-accent" type="checkbox"/>
+<span class="text-sm text-slate-600 group-hover:text-primary transition-colors">TRW</span>
+<span class="ml-auto text-[10px] font-bold text-slate-400">19</span>
+</label>
+</div>
+</div>
+<!-- Price Filter -->
+<div class="p-5 border-b border-slate-100 dark:border-slate-800">
+<h4 class="text-sm font-black uppercase tracking-wider mb-4">Price Range</h4>
+<div class="px-2">
+<div class="h-1 bg-slate-200 rounded-full relative mb-6">
+<div class="absolute h-1 bg-accent left-0 right-1/4 rounded-full"></div>
+<div class="absolute size-4 bg-white border-2 border-accent rounded-full -top-1.5 left-0 cursor-pointer shadow-sm"></div>
+<div class="absolute size-4 bg-white border-2 border-accent rounded-full -top-1.5 right-1/4 cursor-pointer shadow-sm"></div>
+</div>
+<div class="flex items-center justify-between gap-4">
+<div class="flex-1">
+<span class="text-[10px] text-slate-400 font-bold block mb-1">MIN</span>
+<div class="relative">
+<span class="absolute left-2 top-1.5 text-xs text-slate-400">€</span>
+<input class="w-full pl-5 pr-2 py-1.5 text-xs border-slate-200 rounded-lg font-bold" type="text" value="20"/>
+</div>
+</div>
+<div class="flex-1">
+<span class="text-[10px] text-slate-400 font-bold block mb-1">MAX</span>
+<div class="relative">
+<span class="absolute left-2 top-1.5 text-xs text-slate-400">€</span>
+<input class="w-full pl-5 pr-2 py-1.5 text-xs border-slate-200 rounded-lg font-bold" type="text" value="350"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Stock Status -->
+<div class="p-5">
+<label class="flex items-center justify-between cursor-pointer">
+<span class="text-sm font-bold text-primary dark:text-white">In Stock only</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-accent"></div>
+</div>
+</label>
+</div>
+</div>
+<!-- Reset Button -->
+<button class="w-full py-3 text-sm font-bold text-slate-500 hover:text-accent border border-slate-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-900 transition-all">
+                    Reset All Filters
+                </button>
+</aside>
+<!-- Product Grid -->
+<div class="flex-1">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Product Card 1 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden group hover:shadow-xl hover:-translate-y-1 transition-all">
+<div class="relative aspect-square bg-slate-50 dark:bg-slate-800 p-8">
+<img alt="Brake Pads" class="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal" data-alt="High quality ceramic front brake pads" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDefTusR9vV9KAoGEuCIgZU0sCLV1xNkJPww-wLBzKiR6O5jdCQCumeHAF5pRLpSWVr5H5e4KQydLi_1iJwgn64OfF27DqwycT7yFDYIikpGnOgaEhbLKEPPEuxalAXip6EJwJzAIWlcrPp5BC0cvSmhtwlYMMZTbLNzwEgnH2InsPfHNsK6MZedIHP5v4SWCRQjMMrAwnAdZgTfZ61iPGaoXoy9pskDtJBupoT65_MUsIi0HCdZ7oht7bHNtwKj18GSpi0sR76xHw"/>
+<div class="absolute top-4 left-4 bg-green-500 text-white text-[10px] font-black px-2 py-0.5 rounded uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">check_circle</span> Fits your Toyota
+                            </div>
+<div class="absolute top-4 right-4 bg-white/80 backdrop-blur rounded p-1 shadow-sm">
+<img alt="Bosch Logo" class="h-4 w-auto grayscale" data-alt="Bosch brand professional automotive logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBATIyMIjC9Mt7IbO3CS0FMsv-lO-5G1TNeLrKPLDQ5iG4jBkOuEocZBFi2Awzv5MCihc7VnzwOVeCaanT3jtr6sFkvmKFFB9U36KgDSuli5XetQnBQo6vrMKK-x31ChKTvvaPImselXnbqeZcUV_3CeQjFyqtgFw2RxYTwvxSzBGCVGFkIe52z5g3yDmT_4cS5V5mMa5kPp6ThKGYhr-ChTWYLrp-GEDfWU4o6YySCgnZ9YA7cG6dMkq4uNxGJeEz6DO0hHk0OYJE"/>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">SKU: BS-9920-X</p>
+<div class="flex items-center gap-0.5">
+<span class="material-symbols-outlined text-sm accent-red fill-1">star</span>
+<span class="text-[10px] font-bold">4.8</span>
+</div>
+</div>
+<h3 class="text-sm font-bold text-primary dark:text-white group-hover:text-accent transition-colors line-clamp-2 mb-4 h-10">Front Brake Pads - High Performance Ceramic Series</h3>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex flex-col">
+<span class="text-xs text-slate-400 line-through">€59.99</span>
+<span class="text-xl font-black text-primary dark:text-white">€45.99</span>
+</div>
+<button class="size-10 bg-primary dark:bg-accent text-white rounded-lg flex items-center justify-center hover:bg-accent dark:hover:bg-accent/80 transition-all shadow-md">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden group hover:shadow-xl hover:-translate-y-1 transition-all">
+<div class="relative aspect-square bg-slate-50 dark:bg-slate-800 p-8">
+<img alt="Brake Rotor" class="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal" data-alt="Ventilated performance brake rotor disc" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVUuVLVd7Y1Dd2Z_C_olJvXM4QUDypXT-S-BXt36ZoP8QRoGj9bJwLELTp1RnC27UYbYRy1fSRz8iZrWm9BwiJOdTu0PhutXetNDp9r8RWS0FvHkfU_5PQeqd9IPXZ2v29MbwoS-hUrHW_kHan_7d5gsvnC9pZdoHG-ep7HFEB4EVjDsW5iWfZ6tFdnX9THM8rqZwkU4TAPjmrrnrrIiI8mQar5a9LD44y4YpcjNIlu0YYZVY8ATICXef657APOJxKQGXtfI2gzK0"/>
+<div class="absolute top-4 left-4 bg-green-500 text-white text-[10px] font-black px-2 py-0.5 rounded uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">check_circle</span> Fits your Toyota
+                            </div>
+<div class="absolute top-4 right-4 bg-white/80 backdrop-blur rounded p-1 shadow-sm">
+<img alt="Brembo Logo" class="h-4 w-auto grayscale" data-alt="Brembo performance brand logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATXINP9YH3QN14Ya1rl91cM_vx5z9ZbFvEz-Kft1xp0IkU6f9CR9IGFepWj7vPLBo5JsD4u_3tcc44OKQpScBo3fXisMZDcmWzs7_ZUezEsD7qZmnVjGT6GQcjROnnXS6sO_mwy5kzIvkKWzvxgWbylwqNmgkM9hpV8RHjA9o93x2FvkjXNZhtgYjZChyZH_MCVXz6IL05RZuVG181kYS_3My4JDIix_sH24yRdy15MH7EScMu_QOi8hBomJ8MeJJgyqXQVqApdvw"/>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">SKU: BR-V114-Z</p>
+<div class="flex items-center gap-0.5">
+<span class="material-symbols-outlined text-sm accent-red fill-1">star</span>
+<span class="text-[10px] font-bold">5.0</span>
+</div>
+</div>
+<h3 class="text-sm font-bold text-primary dark:text-white group-hover:text-accent transition-colors line-clamp-2 mb-4 h-10">Brembo Sport Ventilated Front Brake Disc</h3>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex flex-col">
+<span class="text-xl font-black text-primary dark:text-white">€112.50</span>
+</div>
+<button class="size-10 bg-primary dark:bg-accent text-white rounded-lg flex items-center justify-center hover:bg-accent dark:hover:bg-accent/80 transition-all shadow-md">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden group hover:shadow-xl hover:-translate-y-1 transition-all">
+<div class="relative aspect-square bg-slate-50 dark:bg-slate-800 p-8">
+<img alt="Brake Fluid" class="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal" data-alt="Brake fluid bottle high temperature DOT4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7ExjOgrrGgQXsDJ3u-UfC2mD35APZ_A3XbnaHTmp6IN1xZtIQC98JrC_NlOf-C4bVy3oWY9_E9XgYR-j7Bn2kYjcwecud7GjV79745yMzIFLrv-p7-TPpNzDt0pVhsXrXSoz_SNvoqKlsYJVw52AABcyDvtWOlrYoFDyk_80kfkjYsxTDWoJ3FOxUinnX00-F0hRZpurfuaQSy-7ZX_9H7Jf306Dfa5uVq7fVkXT_c9CUEKMg_fPrqQFpHGuWyQqv24ApXeMPwmI"/>
+<div class="absolute top-4 left-4 bg-slate-200 text-slate-500 text-[10px] font-black px-2 py-0.5 rounded uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">info</span> Universal Fit
+                            </div>
+<div class="absolute top-4 right-4 bg-white/80 backdrop-blur rounded p-1 shadow-sm">
+<img alt="Castrol Logo" class="h-4 w-auto grayscale" data-alt="Castrol fluids automotive brand logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDecEjsy9T6fYZ5RsmgqbIe7PbhEOKatqmVyTA_gEV49dtEsDpvAXTOnJ6otnSBNn8bmnqOVMNygeGYBcwT-CXq-KAequwnDn3wySJQnRyGKB6GJ27fbRYzdklEA6qyn_bCm4ZBRz1G8by1ehhIimgMcNwTGQNiTNZgDEigUGwCkX5T5_Rwn3pzro0FZwXHoKapHUuXMbRc9RgHuo012Uqd4tuYyvgeWNCNBGiCGhhmVex3D_sNzyLeOAqQaXrA3TfVSedBn9YTaLo"/>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">SKU: BF-D4-500</p>
+<div class="flex items-center gap-0.5">
+<span class="material-symbols-outlined text-sm accent-red fill-1">star</span>
+<span class="text-[10px] font-bold">4.7</span>
+</div>
+</div>
+<h3 class="text-sm font-bold text-primary dark:text-white group-hover:text-accent transition-colors line-clamp-2 mb-4 h-10">Brake Fluid DOT 4 Low Viscosity - 500ml</h3>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex flex-col">
+<span class="text-xl font-black text-primary dark:text-white">€14.90</span>
+</div>
+<button class="size-10 bg-primary dark:bg-accent text-white rounded-lg flex items-center justify-center hover:bg-accent dark:hover:bg-accent/80 transition-all shadow-md">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden group hover:shadow-xl hover:-translate-y-1 transition-all">
+<div class="relative aspect-square bg-slate-50 dark:bg-slate-800 p-8">
+<img alt="Brake Wear Sensor" class="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal" data-alt="Electronic brake pad wear sensor cable" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIJ-jmS6lOogpo3k_oswFWOOYn_R8CRhvk7aGJiS8k0S6omyeJoABvpwgq2k_4VPPHe8Yw6miF_hXGty9JFPp7mc--F15hzNU9M_c1bLe_Yyli8qrl2VErGRchx9gUhXsjaTczcL4ByR4u5zlpomFZFl0XxozGzIHKvL15qj5vxp7BeTU0XEi1_Z4oJQY6RTDOBPhjNzdl-I7_DOvCTAnTAUz7mIMYYZNbKH5WSBGEdKiXn314PPUQ5qONiM7UD0JmalWELWd8TTg"/>
+<div class="absolute top-4 left-4 bg-green-500 text-white text-[10px] font-black px-2 py-0.5 rounded uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">check_circle</span> Fits your Toyota
+                            </div>
+<div class="absolute top-4 right-4 bg-white/80 backdrop-blur rounded p-1 shadow-sm">
+<img alt="Valeo Logo" class="h-4 w-auto grayscale" data-alt="Valeo automotive parts logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5Xon_JYiRtJePVNk7k8aMMIKsE0GRzdd-FC83n8ShBDl3Mzuzsb5GzyF18PC-PM3LY6szrA4ftLXCLRhZaumoj7EU-xRVa_Oojnjy7n7oMbkfNE3mfUSY-DfsRTSerSy3BVpADHJSBGzsHRDfcTqW5dLEsVBjyHF0paBCk4Gbl5NqJX9YelxDZjG-BgGImsuVeUL7YAdgzHx65YW5uoECR9ZGu6ChkqILGvFelLSvvUYRHp-ym_ig6QWTP7QUEYcuir5FMfzLs7Y"/>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">SKU: VL-SN-22</p>
+</div>
+<h3 class="text-sm font-bold text-primary dark:text-white group-hover:text-accent transition-colors line-clamp-2 mb-4 h-10">Electronic Brake Pad Wear Sensor</h3>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex flex-col">
+<span class="text-xl font-black text-primary dark:text-white">€8.40</span>
+</div>
+<button class="size-10 bg-primary dark:bg-accent text-white rounded-lg flex items-center justify-center hover:bg-accent dark:hover:bg-accent/80 transition-all shadow-md">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden group hover:shadow-xl hover:-translate-y-1 transition-all">
+<div class="relative aspect-square bg-slate-50 dark:bg-slate-800 p-8">
+<img alt="Brake Caliper" class="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal" data-alt="Rear wheel brake caliper assembly" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBx6yDkVkKGbIHlVQWQCfRISsHInaieTOD1h4EFEyDONpb8uH0irl1LBdD9eS_6Yul9VfgDI44FR_oGevx3Fo5xekvtesRvSKE_4FL1wdq66uTaRDabtO3XG04LtbQvgGFiTdHUE6BCI5vQR0_Bx_NUHqpTygj7v1K_bycMU34V7QCWpIne4q_uRPLp8j2lTBGgxvoXssmD_cJ3mr_mBzm_gq9iWNZ2qqVvLdoF05MoKKqjEcy8vAPeLvjRIv2Lin2dk61qm7e4H-w"/>
+<div class="absolute top-4 left-4 bg-red-100 text-red-600 text-[10px] font-black px-2 py-0.5 rounded uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">warning</span> 2 units left
+                            </div>
+<div class="absolute top-4 right-4 bg-white/80 backdrop-blur rounded p-1 shadow-sm">
+<img alt="TRW Logo" class="h-4 w-auto grayscale" data-alt="TRW aftermarket parts logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQrdhlHLrYKypVlAxrqCWzEY43mQcqfDRG78kDIJWItB4Zf9si8BFMyu00FMOfu1mIJoFSQrHAmhKt81iV_kGVs6Zs5oxz2y-e60J0TM72pvRfxaMxpdo8HvC-wHpQI68bEnEEZC0dKRz4Fa4Buk-WZKkv2SWbhrPajllu_6CGmI-w8T890O_UBAb8_4EmAoOpu761A9vMuTxxQTZNJttRjhYiLoQ--cpeoWpAj7BdGaliKn0negAJCgLsXqedLlWWBm1_x_Col64"/>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">SKU: TR-CL-90</p>
+</div>
+<h3 class="text-sm font-bold text-primary dark:text-white group-hover:text-accent transition-colors line-clamp-2 mb-4 h-10">TRW Rear Brake Caliper - Right Side</h3>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex flex-col">
+<span class="text-xl font-black text-primary dark:text-white">€185.00</span>
+</div>
+<button class="size-10 bg-primary dark:bg-accent text-white rounded-lg flex items-center justify-center hover:bg-accent dark:hover:bg-accent/80 transition-all shadow-md">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 6 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden group hover:shadow-xl hover:-translate-y-1 transition-all">
+<div class="relative aspect-square bg-slate-50 dark:bg-slate-800 p-8">
+<img alt="Brake Hose" class="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal" data-alt="Braided stainless steel brake hose" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8a9UpCg9XvTX9v7qCxA0x0fvgZD6HjZozuuIF2eX4zo9avE6Q8Ck4DzViyo-u8OPm75rcgV50ZQrG3S2CbrmrjcByLahx8F_3jhF3wgrh4gJeMhFqVQzwksGAvODMwzLnGWeYfOUkON65NN4WCcWKdYgNbJxvAKptvpmM7MkUSGeiIozNHML92aRb1JTZcsBPiv5VLRBvcJvGfir0iJHSY93wqcCkhlR7jq9vf-Y21OHW6t1gL-uYC6CDRyrykXxNqPcMTYcZPvk"/>
+<div class="absolute top-4 left-4 bg-green-500 text-white text-[10px] font-black px-2 py-0.5 rounded uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">check_circle</span> Fits your Toyota
+                            </div>
+<div class="absolute top-4 right-4 bg-white/80 backdrop-blur rounded p-1 shadow-sm">
+<img alt="Brembo Logo" class="h-4 w-auto grayscale" data-alt="Brembo performance brand logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZY96UkS7ZHEPLE3Snsv17HAM2sxrTzJnk5kDSnqvgqE5lvw6qOI3puoSvuEi1R5lWzgP3mEXabdafzDMjFlWvW4p1EEb3QADhvz4PTu_JxlsFGihFIq1wHJDySOayd8QZTuHSE_WcMkKBipRdjAn5PF6_kgSFzwyeWSEDpou4NPlqjKffOTPln0t8wlPiPLvg6DzZbB5ItjEJKsYG36ODjDfqzPpM3OiIPoPO5K_fs-6DR9Y0pK9f-hMQPoYR28GmpCRBgyFqexw"/>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">SKU: BR-HS-44</p>
+</div>
+<h3 class="text-sm font-bold text-primary dark:text-white group-hover:text-accent transition-colors line-clamp-2 mb-4 h-10">Braided Stainless Steel Brake Hose Set</h3>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex flex-col">
+<span class="text-xl font-black text-primary dark:text-white">€89.99</span>
+</div>
+<button class="size-10 bg-primary dark:bg-accent text-white rounded-lg flex items-center justify-center hover:bg-accent dark:hover:bg-accent/80 transition-all shadow-md">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex items-center justify-center gap-2">
+<button class="size-10 flex items-center justify-center rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-400">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="size-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold">1</button>
+<button class="size-10 flex items-center justify-center rounded-lg border border-slate-200 bg-white hover:bg-slate-50 font-bold">2</button>
+<button class="size-10 flex items-center justify-center rounded-lg border border-slate-200 bg-white hover:bg-slate-50 font-bold">3</button>
+<span class="px-2 text-slate-400">...</span>
+<button class="size-10 flex items-center justify-center rounded-lg border border-slate-200 bg-white hover:bg-slate-50 font-bold">12</button>
+<button class="size-10 flex items-center justify-center rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-400">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-primary text-white mt-20 pt-16 pb-8">
+<div class="max-w-7xl mx-auto px-4 md:px-10 grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-white/10 pb-16">
+<div class="space-y-6">
+<div class="flex items-center gap-2 text-white">
+<div class="size-8 bg-white flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-primary text-xl">directions_car</span>
+</div>
+<h2 class="text-xl font-black leading-tight tracking-tight uppercase">Autostyle</h2>
+</div>
+<p class="text-sm text-slate-400 leading-relaxed">The professional's choice for automotive spare parts. Precision, performance, and trust delivered to your door.</p>
+<div class="flex gap-4">
+<a class="size-8 bg-white/5 rounded-full flex items-center justify-center hover:bg-accent transition-colors" href="#"><span class="material-symbols-outlined text-sm">public</span></a>
+<a class="size-8 bg-white/5 rounded-full flex items-center justify-center hover:bg-accent transition-colors" href="#"><span class="material-symbols-outlined text-sm">alternate_email</span></a>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-sm uppercase tracking-widest mb-6 text-accent">Quick Links</h4>
+<ul class="space-y-4 text-sm text-slate-400">
+<li><a class="hover:text-white transition-colors" href="#">Track Order</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Return Policy</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Shipping Info</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Compatibility Guide</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-sm uppercase tracking-widest mb-6 text-accent">Categories</h4>
+<ul class="space-y-4 text-sm text-slate-400">
+<li><a class="hover:text-white transition-colors" href="#">Brakes &amp; Rotors</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Engine &amp; Transmission</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Suspension &amp; Steering</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Lighting &amp; Electrical</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-sm uppercase tracking-widest mb-6 text-accent">Newsletter</h4>
+<p class="text-xs text-slate-400 mb-4">Get the latest technical guides and exclusive deals.</p>
+<form class="flex flex-col gap-2">
+<input class="bg-white/5 border-white/10 rounded-lg py-2 px-4 text-sm focus:ring-accent focus:border-accent" placeholder="Your email" type="email"/>
+<button class="bg-accent hover:bg-accent/90 py-2 rounded-lg text-sm font-bold transition-all">Subscribe</button>
+</form>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-4 md:px-10 mt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+<p>© 2024 Autostyle Automotive Parts. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-white" href="#">Privacy Policy</a>
+<a class="hover:text-white" href="#">Terms of Service</a>
+<a class="hover:text-white" href="#">Cookie Settings</a>
+</div>
+</div>
+</footer>
+</body></html>

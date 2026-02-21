@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1b1b1d;
+  --color-accent-red: #E5232A;
+  --color-accent: #E5232A;
+  --color-background-light: #f7f7f7;
+  --color-background-dark: #191919;
+  --font-display: "Inter", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-background-light text-slate-900 font-display antialiased;
+  }
+}
+
+.custom-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+}
+
+.bg-hero-overlay {
+  background: linear-gradient(rgba(27, 27, 29, 0.7), rgba(27, 27, 29, 0.85));
+}
