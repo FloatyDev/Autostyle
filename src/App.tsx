@@ -1,3 +1,4 @@
+console.log("EVALUATING APP.TSX");
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
@@ -18,6 +19,7 @@ import { Products } from './pages/admin/Products';
 import { Categories } from './pages/admin/Categories';
 
 function App() {
+  console.log("APP COMPONENT EXECUTING!");
   return (
     <AuthProvider>
       <Router>
