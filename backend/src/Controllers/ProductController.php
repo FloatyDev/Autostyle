@@ -40,7 +40,7 @@ class ProductController
 
             // 2. Category Filter (Recursive)
             if (isset($_GET['category']) && $_GET['category'] !== 'all-categories') {
-                $categoryId = (int) $_GET['category'];
+                $categoryId = $_GET['category'];
 
                 // Fetch all categories to determine children
                 $stmtCats = $db->query("SELECT id, parent_id FROM categories");
